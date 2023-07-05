@@ -8,6 +8,11 @@ module.exports = {
 
 async function index(req, res) {
   const flights = await Flight.find({});
+  flights.sort(function(a,b){
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(a.departs) - new Date(b.departs);
+  });
   res.render('flights/index', { flights });
 }
 
