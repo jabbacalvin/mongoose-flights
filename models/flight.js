@@ -17,13 +17,13 @@ const flightSchema = new mongoose.Schema({
   departs: {
     type: Number,
     default: function() {
-      return new Date().getFullYear();
-    },
-    min: 1927
+        const oneYearFromNow = new Date();
+        return oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+    }
   }
 }, {
   timestamps: true
 });
 
 // Compile the schema into a model and export it
-module.exports = mongoose.model('Movie', movieSchema);
+module.exports = mongoose.model('Movie', flightSchema);
