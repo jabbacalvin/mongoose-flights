@@ -1,25 +1,24 @@
 <%- include('../partials/header') %>
 
 <h2>Flight List</h2>
-<table>
+<table class="table table-dark table-striped">
   <thead>
     <tr>
-      <th>Airline</th>
-      <th>Airport</th>
-      <th>Flight Number</th>
-      <th>Departs</th>
+      <th scope="col">Airline</th>
+      <th scope="col">Airport</th>
+      <th scope="col">Flight Number</th>
+      <th scope="col">Departs</th>
     </tr>
   </thead>
   <tbody>
-    <!-- Write the line of EJS to iterate over movies using forEach -->
     <% flights.forEach(function(f) { %>
-      <tr>
+        <% const today = new Date(); %>
+      <tr class="<%= f.departs < today ? 'table-danger' : '' %>">
         <td><%= f.airline %></td>
         <td><%= f.airport %></td>
         <td><%= f.flightno %></td>
         <td><%= f.departs.toDateString() %></td>
       </tr>
-    <!-- Close the forEach using EJS here -->
     <% }); %>
   </tbody>
 </table>
