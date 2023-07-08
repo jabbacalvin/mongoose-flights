@@ -5,10 +5,8 @@
   <thead>
     <tr>
       <th scope="col">Airline</th>
-      <th scope="col">Airport</th>
       <th scope="col">Flight Number</th>
       <th scope="col">Departs</th>
-      <th scope="col">Time</th>
     </tr>
   </thead>
   <tbody>
@@ -16,10 +14,9 @@
         <% const today = new Date(); %>
       <tr class="<%= f.departs < today ? 'table-danger' : '' %>">
         <td><%= f.airline %></td>
-        <td><%= f.airport %></td>
         <td><%= f.flightNo %></td>
         <td><%= f.departs.toDateString() %></td>
-        <td><%= f.departs.toTimeString() %></td>
+        <td><a href="/flights/<%= f._id %>" class="btn btn-outline-info" role="button">DETAILS</a></td>
       </tr>
     <% }); %>
   </tbody>

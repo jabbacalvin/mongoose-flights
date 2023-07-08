@@ -1,0 +1,67 @@
+<%- include('../partials/header') %>
+
+<h2>Flight Details</h2>
+<section id="show-page">
+  <div><b>Airline: </b></div>
+  <div><%= flight.airline %></div>
+  <div><b>Airport: </b></div>
+  <div><%= flight.airport %></div>
+  <div><b>Flight Number: </b></div>
+  <div><%= flight.flightNo %></div>
+  <div><b>Departs: </b></div>
+  <div><%= flight.departs.toDateString() %></div>
+  <div><b>Time: </b></div>
+  <div><%= flight.departs.toTimeString() %></div>
+  <div><b>Tickets: </b></div>
+  <% tickets.forEach(function(t) { %>
+    <article class="badge rounded-pill text-bg-secondary"><%= t.seat %></article>
+  <% }) %>
+  <br><br>
+  <a href="/flights/<%= flight._id %>/tickets/new" class="btn btn-outline-primary" role="button">Add Ticket</a>
+</section>
+<br>
+
+<br><h2>Destination</h2>
+<form id="add-destination-form" method="POST"
+  action="/flights/<%= flight._id %>/destinations">
+  <label class="form-label">Arrival: 
+    <input type="datetime-local" name="arrival" class="form-control">
+  </label><br>
+  <label class="form-label">Airport: 
+    <select name="airport" class="form-select">
+      <option value="AUS">AUS</option>
+      <option value="DFW">DFW</option>
+      <option value="DEN">DEN</option>
+      <option value="LAX">LAX</option>
+      <option value="SEN">SEN</option>
+      <option value="IAH">IAH</option>
+      <option value="HKG">HKG</option>
+    </select>
+  </label><br>
+  <input type="submit" class="btn btn-primary mb-3">
+</form>
+
+<% if (flight.destinations.length) { %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Airport</th>
+          <th scope="col">Arrival Date</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% flight.destinations.forEach(function(f) { %>
+          <tr>
+            <td><%= f.airport %></td>
+            <td><%= f.arrival.toDateString() %></td>
+            <td><%= f.arrival.toTimeString() %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <h5>No Destinations Yet</h5>
+  <% } %>
+  
+<%- include('../partials/footer') %>

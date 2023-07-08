@@ -1,0 +1,25 @@
+<%- include('../partials/header') %>
+
+<br>
+<a href="/flights/<%= flight._id %>" class="btn btn-outline-dark" role="button">< Back</a>
+
+<br>
+<div>Before adding, please ensure that the Seat is not in the following list:</div>
+<section id="badge-container">
+  <% tickets.forEach(function(t) { %>
+    <article class="badge rounded-pill text-bg-secondary"><%= t.seat %></article>
+  <% }) %>
+</section>
+
+<form id="add-performer-form" action="/flights/<%= flight._id %>/tickets/new" method="POST">
+  <label class="form-label">Seat:
+    <input class="form-control" name="seat" pattern="[A-F][1-9]\d?" placeholder="Must be 'A1' thru 'F99'">
+  </label><br>
+
+  <label class="form-label">Price:
+    <input class="form-control" type="number" name="price">
+  </label><br>
+  <input type="submit" class="btn btn-primary mb-3" value="Add Seat">
+</form>
+
+<%- include('../partials/footer') %>
