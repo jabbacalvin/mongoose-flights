@@ -12,12 +12,16 @@
   <div><%= flight.departs.toDateString() %></div>
   <div><b>Time: </b></div>
   <div><%= flight.departs.toTimeString() %></div>
-  <div><b>Tickets: </b></div>
-  <% tickets.forEach(function(t) { %>
-    <article class="badge rounded-pill text-bg-secondary"><%= t.seat %></article>
-  <% }) %>
-  <br><br>
-  <a href="/flights/<%= flight._id %>/tickets/new" class="btn btn-outline-primary" role="button">Add Ticket</a>
+  <div><b>Tickets Sold: </b></div>
+  <div>
+    <% let total = 0 %>
+    <% tickets.forEach(function(t) { %>
+      <% total += 1; %>
+      <!-- <article class="badge rounded-pill text-bg-secondary"><%= t.seat %></article> -->
+    <% }) %>
+    <%= total %>
+  </div>
+  <a href="/flights/<%= flight._id %>/tickets/new" class="btn btn-outline-primary btn-sm" role="button">Add Tickets</a>
 </section>
 <br>
 
